@@ -61,3 +61,16 @@
   - delete - teniendo en cuenta que la convención es enviar en el response el objeto eliminado.
 
     > En estos últimos dos métodos, como estamos usando como valor de ID a un UUID, es necesario usar en el controller el `ParseUUIDPipe` y pasárselo como segundo parámetro al decorador `@Param()` del EP. Ésto es así para validar que sí o sí le llegue como parámetro `:id` un valor UUID.
+
+### 8- Actualizar producto
+
+- Implementamos el método faltante en `products.service.ts`: `update()`
+
+  > Observar que ya cuando corrimos el comando `nest generate resource <nombre>` crea el DTO para el update de la entidad y la implementaciónde éste se ve así, incialmente:
+    ```typescript
+    export class UpdateProductDto extends PartialType(CreateProductDto) {}
+    ```
+
+  Lo que hace `PartialType(CLASE)` de nestjs es lo mismo que hace `Partial<TYPE | INTERFACE>` de TypeScript.
+
+- Implementamos el método `updateWith()` en la clase `Product`, que se va a encargar de actualizar los valores de las propiedades del objeto creado.

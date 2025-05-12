@@ -1,0 +1,20 @@
+type=message
+S${section}-C${class}: ${summary}
+
+# Esta regla define el formato para los mensajes de commit donde:
+# - section: número de sección que se le pedirá al usuario
+# - class: número de clase que se indica en el README de cada módulo
+# - summary: resumen de los cambios en máximo 72 caracteres
+#
+# Ejemplos válidos:
+# S2-C5: Implementar validaciones de productos usando class-validator
+# S2-C6: Agregar servicios base para gestión de productos en memoria
+# S2-C7: Implementar endpoints para listar y eliminar productos
+#
+# Reglas:
+# 1. El formato debe ser exactamente S#-C#: seguido del resumen
+# 2. El número de sección (S#) debe ser proporcionado por el usuario
+# 3. El número de clase (C#) debe corresponder al indicado en el README del módulo
+# 4. El resumen debe tener máximo 72 caracteres
+# 5. El resumen debe comenzar con un verbo en infinitivo
+# 6. No se permiten caracteres especiales excepto los definidos en el formato

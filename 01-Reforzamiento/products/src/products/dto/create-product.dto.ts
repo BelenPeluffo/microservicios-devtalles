@@ -11,5 +11,5 @@ export class CreateProductDto {
 
   @IsNumber()
   @Type(() => Number)
-  price: string;
+  price: number;
 }

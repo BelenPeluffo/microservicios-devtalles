@@ -14,9 +14,8 @@ export class Product {
   ) {}
 
   updateWith(updateProductDto: Omit<UpdateProductDto, 'id'>) {
-    if (updateProductDto.name) this.name = updateProductDto.name;
-    if (updateProductDto.description)
-      this.description = updateProductDto.description;
-    if (updateProductDto.price) this.price = Number(updateProductDto.price);
+    this.name = updateProductDto.name ?? this.name;
+    this.description = updateProductDto.description ?? this.description;
+    this.price = updateProductDto.price ?? this.price;
   }
 }

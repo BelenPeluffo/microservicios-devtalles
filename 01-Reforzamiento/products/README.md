@@ -52,4 +52,12 @@
   const newProduct = new Product(uuid(), name, description, Number(price));
   ```
 
-- 
+### 7- Listar y eliminar productos
+
+- Implementamos algunos métodos en `products.service.ts`
+  
+  - findAll
+  - find
+  - delete - teniendo en cuenta que la convención es enviar en el response el objeto eliminado.
+
+    > En estos últimos dos métodos, como estamos usando como valor de ID a un UUID, es necesario usar en el controller el `ParseUUIDPipe` y pasárselo como segundo parámetro al decorador `@Param()` del EP. Ésto es así para validar que sí o sí le llegue como parámetro `:id` un valor UUID.

@@ -29,3 +29,27 @@
   ```
 
 - Los DTOs determinan la estructura de los objetos que yo voy a recibir.
+
+### 6- Servicios y respuestas
+
+> Disclaimer: primeramente, vamos a gestionar la persistencia en memoria. Luego lo haremos en DB. Ésto implicará que cada vez que se recargue la app perderemos todos los datos almacenados.
+
+- Los servicios es donde se implementa la lógica de negocio.
+- La clase en que se construye la entidad se define usando un constructor que tome las distintas propiedades para después poder crear objetos en base a esta clase y que se le asignen los valores correspondientes en base a lo obtenido por argumentos.
+
+  ```typescript
+  // product.entity.ts - DEFINICIÓN
+  export class Product {
+    constructor(
+      public id: string,
+      public name: string,
+      public description: string,
+      public price: number,
+    ) {}
+  }
+
+  // products.service.ts - INSTANCIACIÓN
+  const newProduct = new Product(uuid(), name, description, Number(price));
+  ```
+
+- 

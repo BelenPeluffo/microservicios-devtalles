@@ -10,7 +10,7 @@ export class ProductsService {
 
   create(createProductDto: CreateProductDto) {
     const { name, description, price } = createProductDto;
-    const newProduct = new Product(uuid(), name, description!, Number(price));
+    const newProduct = new Product(uuid(), name, description, Number(price));
     this.products.push(newProduct);
     return newProduct;
   }

@@ -76,9 +76,20 @@
 - Implementamos el método `updateWith()` en la clase `Product`, que se va a encargar de actualizar los valores de las propiedades del objeto creado.
 
 ### 9- Variables de entorno
-> La forma convencional de crearlas es usando el `ConfigModule.forRoot()` en el `app.module.ts`, pero en este curso lo vamos a hacer distinto por una cuestión de restar complejidad a los microservicios.
+> La forma convencional de crearlas es usando el `ConfigModule.forRoot()` en el `app.module.ts`, pero en este curso lo vamos a hacer distinto por una cuestión de restar complejidad a los microservicios. En particular también se toma esta decisión porque nos permite acceder de forma síncrona a las variables de entorno sin necesidad de usar `await-async`.
 
 - Instalar `dotenv`
 - Creamos el archivo `config/envs.ts` desde el cual accederemos a las variables de entorno
 - Creamos el `.env` en el directorio raíz
 - Creamos el `.env.template` o `.env.example` para dejar constancia de la estructura de variables de entorno
+
+### 10- Joi - Esquema de validación
+
+Nuestras variables de entorno deben ser validadas para que al levantar la aplicación ésta esté correctamente setteada. Por ésto se emplean los esquemas de validación en las variables de entorno.
+
+- Instalamos el paquete validador (en este caso usamos `joi`)
+- Creamos el schema del objeto de variables de entorno que deben estar presentes
+- Implementamos la lógica de validación
+- Implementamos bloque condicional para levantar error si alguna de las variables requeridas no está definida
+- Exportamos los valores devueltos por el `value` del método de validación, para que me devuelva los valores con su type correcto (de lo contrario, accediendo al `process.env` siempre me devuelve strings).
+- Implementamos una interfaz para definir la estructura del export del `envs`

@@ -19,7 +19,7 @@ const envSchema = joi
 const { error, value: env } = envSchema.validate(process.env);
 
 if (error) {
-  throw new Error(error.message);
+  throw new Error(`Config validation error: ${error.message}`);
 }
 
 // Renombro la variable destructurada para poder typarla y usar

@@ -29,3 +29,28 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 
 4. Creamos un `/config/index.ts` para exportar todo lo que se encuentre en `envs.ts`.
 5. Modificamos `main.ts` para tomar el puerto desde el `config`
+
+### 7- Prisma & SQLite
+`prisma` es equivalente a `TypeORM` y `sequelize`.
+
+1. Instalar prisma: `yarn add --dev prisma`
+2. Inicializamos prisma en nuestro proyecto: `npx prisma` y luego `npx prisma init`
+    
+    Ésto modificará nuestro `.env`, agregando una `DATABASE_URL`
+
+3. Actualizaremos el `scheme.prisma` en base al recipe que provee la docu oficial de NestJSpara definir el modelo `Product` de la DB
+
+    > ES IMPERIOSO que se elimine la propiedad `output` que se crea por defecto en el `client`.
+
+    > Hacer ésto equivale a usar las entities en `TypeORM` o a definir los modelos en `sequelize`
+
+    > Podemos instalar la extensión `Prisma` para habilitar el syntax highlighting en los archivos `.prisma`.
+
+4. Actualizamos el `envs.ts` para que tenga presente la nueva variable de entorno `DATABASE_URL`.
+5. Instalar el `@prisma/client`, que es lo que nos permitirá trabajar con la DB.
+6. Ejecutaremos la migración `npx prisma migrate dev --name init`, que creará la DB en función a cómo tenemos definido el schema
+    > Ésto crea el `dev.db` que definimos como valor en el `.env.DATABASE_URL`.
+7. Ejecutemos `npx prisma generate` para generar el cliente y evitar que rompa la app.
+8. Actualizamos nuestro `ProductsService` para que extienda de `PrismaClient` e implemente `OnModuleInit`. Implementamos el método `onModuleInit() de forma que se connecte a la DB.
+9. Implementamos el logger en `ProductService`: creamos una instancia de logger y usamos éso en vez de `console.log` en el `onModuleInit()`.
+10. Hacemos lo mismo en el `main`.

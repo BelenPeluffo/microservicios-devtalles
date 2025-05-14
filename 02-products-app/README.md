@@ -19,3 +19,13 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 3. Definimos los decoradores para el DTO de creación de productos
 4. Definir el `app.useGlobalPipes` para que tome las validaciones de los decoradores y no deje que se le mande a cada EP más que las propiedades definidas.
 5. Definimos los types de las propiedades de los DTOs para que realice la transformación de los valores obtenidos.
+
+### 6- Configuración de variables de entorno
+1. Crear el /config/envs.ts y el /.env.
+2. Instalamos `dotenv` y `joi`.
+3. Creamos las variables, las tipamos y exportamos (en este caso, yo exporté las variables de entorno en el objeto `config`)
+
+    > Es **muy necesario** que hagamos `import 'dotenv/config'` porque si no, no va a leernos las variables de entorno!
+
+4. Creamos un `/config/index.ts` para exportar todo lo que se encuentre en `envs.ts`.
+5. Modificamos `main.ts` para tomar el puerto desde el `config`

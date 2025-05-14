@@ -54,3 +54,12 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 8. Actualizamos nuestro `ProductsService` para que extienda de `PrismaClient` e implemente `OnModuleInit`. Implementamos el método `onModuleInit() de forma que se connecte a la DB.
 9. Implementamos el logger en `ProductService`: creamos una instancia de logger y usamos éso en vez de `console.log` en el `onModuleInit()`.
 10. Hacemos lo mismo en el `main`.
+
+### 8- Insertar y comprobar la base de datos
+1. Actualizamos el método de creación de productos para que haga la inserción en la DB.
+
+    Lo hacemos mediante `this.<entidad>.create({ data: <DTO> })` donde `<entidad>` es el nombre que definimos como nombre del modelo en `schema.prisma`. Como en nuestro caso definimos `model Product`, deberemos hacer `this.product.create()`.
+
+    > Para poder abrir la DB, simplemente desde DBeaver hacemos Archivo > Buscar archivo denominado > filtrar por *.db y abrir el archivo. Ahí se abrirá una conexión nueva dentro de la carpeta `File databases`.
+
+2. Creamos un `seed.sql` que contiene un insert para crear 50 productos.

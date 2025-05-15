@@ -67,5 +67,14 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 ### 9- Obtener productos y paginarlos
 1. Actualizar el `ProductsService.findAll()`.
 2. Crear DTO de paginación.
+
+    > `limit` y `page` no deben definirse con el operador opcional de TypeScript porque como ya definimos que su valor por defecto será `10` y `1` respectivamente, en la realidad siempre tendrá definido un valor. Además, hace fallar la app.
+
 3. Creamos un `index` dentro de la carpeta `common`.
 4. Agregamos al `ProductsController.findAll` el decorador `@Query` con el PaginationDTO.
+
+### 10- Paginar mediante Prisma
+1. Actualizamos la firma del `ProductsService.findAll()` para que tome el pagination DTO y actualizamos el objeto de configuración del `findMany`.
+2. Calcular el total de registros.
+3. Calcular la última página.
+4. Actualizar el return del `ProductsService.findAll()` para que devuelva `data` y `meta`, donde irán los productos, por un lado, y los datos de paginación, por el otro.

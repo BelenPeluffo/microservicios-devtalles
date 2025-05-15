@@ -87,3 +87,6 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 
 ### 12- Actualizar producto
 1. Actualizamos el `ProductsController.update()` para que tome el ID y para que gestione el error si no existiera un producto con el ID que se le proveyó.
+
+### 13- Eliminar un producto
+1. Implementamos el método de HARD delete en `ProductsService.delete()`.

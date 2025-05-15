@@ -78,3 +78,9 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 2. Calcular el total de registros.
 3. Calcular la última página.
 4. Actualizar el return del `ProductsService.findAll()` para que devuelva `data` y `meta`, donde irán los productos, por un lado, y los datos de paginación, por el otro.
+
+### 11- Retornar producto por ID
+1. Actualizamos `ProductsService.findOne()` para que retorne el resultado de hacer `findUnique()`.
+
+    > También se puede usar el `findFirst()`.
+2. Implementar manejo de error si no existe el producto con el ID provisto.

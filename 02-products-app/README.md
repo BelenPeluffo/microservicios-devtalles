@@ -84,3 +84,6 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 
     > También se puede usar el `findFirst()`.
 2. Implementar manejo de error si no existe el producto con el ID provisto.
+
+### 12- Actualizar producto
+1. Actualizamos el `ProductsController.update()` para que tome el ID y para que gestione el error si no existiera un producto con el ID que se le proveyó.

@@ -63,3 +63,9 @@ El microservicio se va a encargar solamente de la entidad `Products`.
     > Para poder abrir la DB, simplemente desde DBeaver hacemos Archivo > Buscar archivo denominado > filtrar por *.db y abrir el archivo. Ahí se abrirá una conexión nueva dentro de la carpeta `File databases`.
 
 2. Creamos un `seed.sql` que contiene un insert para crear 50 productos.
+
+### 9- Obtener productos y paginarlos
+1. Actualizar el `ProductsService.findAll()`.
+2. Crear DTO de paginación.
+3. Creamos un `index` dentro de la carpeta `common`.
+4. Agregamos al `ProductsController.findAll` el decorador `@Query` con el PaginationDTO.

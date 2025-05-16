@@ -90,3 +90,11 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 
 ### 13- Eliminar un producto
 1. Implementamos el método de HARD delete en `ProductsService.delete()`.
+
+### 14- Soft delete
+1. Agregamos la flag `available` en el model de Product en `schema.prisma` donde almacenaremos un booleano que determinará el estado de actividad de los registros.
+2. Corremos una migración para generar el cambio en la tabla: `npx prisma migrate dev --name add-available-column-to-product-table`
+3. Corremos `npx prisma generate` para que se actualicen los types en el cliente de Prisma.
+4. Actualizar `findAll` y `findOne` para tener en consideración que los registros entre los que buscar deben ser aquellos con el `available: true`.
+5. Crear un índice para el `available` porque va a usarse en varias queries: `@@index([available])`.
+6. Corremos una nueva migración

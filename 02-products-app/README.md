@@ -98,3 +98,11 @@ El microservicio se va a encargar solamente de la entidad `Products`.
 4. Actualizar `findAll` y `findOne` para tener en consideración que los registros entre los que buscar deben ser aquellos con el `available: true`.
 5. Crear un índice para el `available` porque va a usarse en varias queries: `@@index([available])`.
 6. Corremos una nueva migración
+
+### 15- Transformar a microservicio
+Podríamos simplemente convertir nuestra api REST mediante el uso, en `main.ts`, de `app.startAllMicroservices()` pero éso provocaría que nuestra app se siga comportando como REST y realice las comunicaciones usando el protocolo HTTP, siendo un híbrido entre REST y microservicio. Nosotrxs, por el contrario, queremos usar el protocolo TCP.
+
+> [Documentación de NestJS sobre microservicios](https://docs.nestjs.com/microservices/basics)
+
+1. `yarn add @nestjs/microservices`
+2. Modificar el método del `NestFactory` a usar en el `main.ts`

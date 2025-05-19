@@ -123,6 +123,15 @@ Podríamos simplemente convertir nuestra api REST mediante el uso, en `main.ts`,
 El gateway sirve para conectar los request del user con los EPs necesarios del microservicio, entre otras cosas. Ésto quiere decir que no tiene más que lógica de redirección, nada que ver con la base de datos.
 
 ### 3- ClientGateway
-Creamos el microservicio de gateway.
+Creamos el microservicio de gateway en el directorio `/gateway`.
 
 Como en el [inicio de la sección 4](#1--creación-de-proyecto), hay que eliminar los controllers y servicios del `app` y las importaciones en el módulo y en el `main.ts`.
+
+### 4- Rutas y variables de entorno
+Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs que ya definimos, tenemos que realizar una serie de implementaciones en nuestro gateway para que tome las peticiones HTTP y haga las peticiones TCP correspondientes a los distintos EPs.
+
+1. Copiamos lo que teníamos en `/02-products-app/products/src/config/envs.ts` y lo pegamos en el nuevo `.env` del gateway.
+2. Instalamos las dependencias necesarias (joi y dotenv).
+3. Creamos otro recurso también llamado productos: `nest g res products`, que es el que se encargará de comunicarse con el microservicio `/02-products-app/products`.
+    > Debo seleccionar para que me cree una API REST y que no me cree los EPs CRUD ni otras cosas.
+4. 

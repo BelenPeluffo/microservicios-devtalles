@@ -106,3 +106,15 @@ Podríamos simplemente convertir nuestra api REST mediante el uso, en `main.ts`,
 
 1. `yarn add @nestjs/microservices`
 2. Modificar el método del `NestFactory` a usar en el `main.ts`
+
+### 16- Message Patterns
+1. Actualizamos el controller
+
+    1. Eliminar los decoradores HTML y agregándole a cada uno el `@MessagePattern`
+
+    2. Lo que reciba el POST no vendrá más en `@Body` sino en `@Payload`; lo mismo con los `@Query` de los demás métodos
+        
+        > Siguen aplicando las validaciones definidas para los DTOs con `class-validator`
+
+    3. Actualizamos el DTO de actualización. Ésto es debido a que como no hay más diferencia entre `Query`, `Param` y `Body`, porque todos son reemplazados por `Payload`, sólo se puede definir un elemento y por lo tanto el `:id` que llegaba en el parámetro debe ser agregado en el DTO.
+

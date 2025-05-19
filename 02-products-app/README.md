@@ -1,4 +1,4 @@
-## Sección 4 - Reforzamiento
+## Sección 4 - Products Microservice
 
 ### 1- Creación de proyecto
 Existen por lo menos dos formas de crear los microservicios que implementaremos y de relacionarlos.
@@ -118,3 +118,11 @@ Podríamos simplemente convertir nuestra api REST mediante el uso, en `main.ts`,
 
     3. Actualizamos el DTO de actualización. Ésto es debido a que como no hay más diferencia entre `Query`, `Param` y `Body`, porque todos son reemplazados por `Payload`, sólo se puede definir un elemento y por lo tanto el `:id` que llegaba en el parámetro debe ser agregado en el DTO.
 
+
+## Sección 5 -  Gateway
+El gateway sirve para conectar los request del user con los EPs necesarios del microservicio, entre otras cosas. Ésto quiere decir que no tiene más que lógica de redirección, nada que ver con la base de datos.
+
+### 3- ClientGateway
+Creamos el microservicio de gateway.
+
+Como en el [inicio de la sección 4](#1--creación-de-proyecto), hay que eliminar los controllers y servicios del `app` y las importaciones en el módulo y en el `main.ts`.

@@ -155,3 +155,10 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
     > `send()` espera una respuesta; `emit()` no.
 
     Los parámetros que toma el `send` son el objeto o string que hayamos definido en el controller del microservicio (en nuestro caso, fue { cmd: key }) y el segundo parámetro es un objeto que representa el payload.
+
+### 7- Paginar resultados y enviar payload
+
+1. Instalar `class-transformer` y `class-validator`
+2. Copiar `./products/src/common` a `./gateway/src`
+3. Implementar el useGlobalPipes en el `./gateway/src/main.ts`
+4. Actualizamos `findAll()` para que de parámetro tome el `@Query` y el DTO correspondiente y actualizamos la instancia de `send()` para pasarle por como segundo argumento al DTO

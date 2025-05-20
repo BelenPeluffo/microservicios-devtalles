@@ -134,4 +134,15 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 2. Instalamos las dependencias necesarias (joi y dotenv).
 3. Creamos otro recurso también llamado productos: `nest g res products`, que es el que se encargará de comunicarse con el microservicio `/02-products-app/products`.
     > Debo seleccionar para que me cree una API REST y que no me cree los EPs CRUD ni otras cosas.
-4. 
+
+### 5- Levantar Products Microservice y conectarlo al Gateway
+
+1. Instalamos el `@nestjs/microservices` en el `gateway`
+2. En `ProductsModule` agregamos a imports el `ClientsModule.register()`
+
+    > Tenemos que definir el mismo tipo de transporte que el definido en el microservicio. Ésto lo vemos en `/02-products-app/products/src/main.ts`.
+
+3. Creamos constantes que almacenen el nombre de módulo a registrar en `/02-products-app/gateway/src/config/service.ts`.
+4. Agregar a la definición del `ClientModule` las opciones con el HOST y el PORT
+5. Actualizar el `.env` con variables donde se guarden HOST y PORT
+6. Actualizar `envs.ts` con la definición de ambas: `EnvVars`, `envSchema` y `config`

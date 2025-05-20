@@ -146,3 +146,12 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 4. Agregar a la definición del `ClientModule` las opciones con el HOST y el PORT
 5. Actualizar el `.env` con variables donde se guarden HOST y PORT
 6. Actualizar `envs.ts` con la definición de ambas: `EnvVars`, `envSchema` y `config`
+
+### 6- Obtener todos los productos
+
+1. Inyectamos el microservicio en el controller del gateway relacionado a ese servicio usando `@Inject(KEY_DEL_MS)` y definimos la variable privada `productService`
+2. Comenzamos a implementar los métodos del microservicio en el controller del gateway.
+
+    > `send()` espera una respuesta; `emit()` no.
+
+    Los parámetros que toma el `send` son el objeto o string que hayamos definido en el controller del microservicio (en nuestro caso, fue { cmd: key }) y el segundo parámetro es un objeto que representa el payload.

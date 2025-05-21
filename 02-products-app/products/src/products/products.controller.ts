@@ -39,7 +39,7 @@ export class ProductsController {
   // @Patch(':id')
   @MessagePattern({ cmd: 'updateProduct' })
   update(@Payload() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(updateProductDto.id, updateProductDto);
+    return this.productsService.update(+updateProductDto.id, updateProductDto);
   }
 
   // @Delete(':id')

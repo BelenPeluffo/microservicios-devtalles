@@ -211,3 +211,10 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 5. Creamos un bloque condicional para mandar el mensaje recibido de MS
 6. Creamos un bloque fuera del condicional para errores no contemplados
 7. En el MS actualizamos la estructura del argumento del `RcpException` para que sea `{ status, message }`.
+   > Otra forma de hacer el cacth de los errores de RCP es usando `.pipe(catchError(error => throw new RcpException(error)))` como se ve en el método del update
+
+### 11- Implementar métodos faltantes
+
+1. Copiamos `products/src/products/dto` hacia `gateway/src/products` para tener disponibilizados los DTOs de creación y actualización
+2. Para el método de actualización, agregamos el Pipe para convertir el ID en número
+3. Eliminamos del DTO de actualización la prop ID porque en este servicio no lo necesitamos (en contraste al MS).

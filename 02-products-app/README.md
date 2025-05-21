@@ -202,3 +202,12 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 3. Modificamos el tipo de error a levantar en el controller del gateway para que cree una nueva instancia de `RcpException` en vez de un error genérico.
    > Definimos que cree una instancia de `RcpException` porque es esta clase la que definimos en el decorador `@Catch` del filtro que creamos. Así es como la app sabe que tiene que capturarla.
 
+### 10- Implementar el RpcCustomExceptionFilter
+
+1. Cambiamos la clase a implementar a un `ExceptionFilter` y borramos el return type del `catch` en el filte del filtro que creamos
+2. Implementamos el `context`
+3. Almacenamos la respuesta del error en `response`
+4. Almacenamos el error que nos devuelve el MS en `error`
+5. Creamos un bloque condicional para mandar el mensaje recibido de MS
+6. Creamos un bloque fuera del condicional para errores no contemplados
+7. En el MS actualizamos la estructura del argumento del `RcpException` para que sea `{ status, message }`.

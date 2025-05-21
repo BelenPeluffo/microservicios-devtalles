@@ -8,6 +8,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaClient } from '@prisma/client';
 import { PaginationDto } from 'src/common';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class ProductsService extends PrismaClient implements OnModuleInit {
@@ -43,11 +44,12 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
   }
 
   async findOne(id: number) {
+    console.log('Prod MS > findOne > id', id);
     const product = await this.product.findUnique({
       where: { id, available: true },
     });
     if (!product) {
-      throw new NotFoundException('Product not found');
+      throw new RpcException('Product not found KHE');
     }
     return product;
   }

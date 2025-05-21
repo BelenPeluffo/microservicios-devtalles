@@ -162,3 +162,13 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 2. Copiar `./products/src/common` a `./gateway/src`
 3. Implementar el useGlobalPipes en el `./gateway/src/main.ts`
 4. Actualizamos `findAll()` para que de parámetro tome el `@Query` y el DTO correspondiente y actualizamos la instancia de `send()` para pasarle por como segundo argumento al DTO
+
+### 8- Manejo de excepciones
+
+1. Implementamos el `send()` para el GET por ID. Como argumento de payload tenemos que pasar exactamente la estructura que hayamos definido en el controller del MS
+
+    En este caso, el `@Payload` que espera el ID es literalmente un solo valor, entonces el segundo argumento del `send()` será `id`.
+2. Implementamos una instancia de `RpcException` para definir errores en el controller service del microservicio
+    > Ésto nos permitirá tener logs más concisos y con un color scheme correspondiente.
+    Lo que se le pase como argumento a la `RcpException` en el MS será devuelto así a la API que lo contacte.
+3. Implementamos en el controller del gateway un try-catch donde el catch va a devolver el error que nos devuelve el MS como un `BadRequestError`.

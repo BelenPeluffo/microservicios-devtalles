@@ -218,3 +218,18 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 1. Copiamos `products/src/products/dto` hacia `gateway/src/products` para tener disponibilizados los DTOs de creación y actualización
 2. Para el método de actualización, agregamos el Pipe para convertir el ID en número
 3. Eliminamos del DTO de actualización la prop ID porque en este servicio no lo necesitamos (en contraste al MS).
+
+## Sección 6 - Orders Microservice
+
+### 3- Inicio de proyecto
+Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-products-app/orders`).
+1. Iniciamos el proyecto en su carpeta correspondiente: `nest new .`
+2. Setteamos las variables de entorno para levantar la app en el puertp `3002`
+   1. Instalar `joi` y `dotenv`
+   2. Importar `dotenv` en el archivo
+   3. Crear interfaz y esquema de las variables de entorno
+   4. Implementar instancia de `validate()` de joi
+   5. Tipar el `value` devuelto en la instancia con la interfaz creada
+   6. Crear `config` con una propiedad por cada variable
+   7. Asignar en `main.ts` al `listen()` el `config.PORT`
+3. Borrar todos los archivos del `src` con exceptión del `.module`

@@ -5,3 +5,6 @@
 
 # Build output
 /02-products-app/*/dist
+
+# Postgres data
+/02-products-app/orders/postgres

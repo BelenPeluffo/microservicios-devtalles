@@ -222,7 +222,9 @@ Como nosotrxs tenemos que seguir pudiendo acceder a través de HTTP a los EPs qu
 ## Sección 6 - Orders Microservice
 
 ### 3- Inicio de proyecto
+
 Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-products-app/orders`).
+
 1. Iniciamos el proyecto en su carpeta correspondiente: `nest new .`
 2. Setteamos las variables de entorno para levantar la app en el puertp `3002`
    1. Instalar `joi` y `dotenv`
@@ -235,18 +237,64 @@ Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-pr
 3. Borrar todos los archivos del `src` con exceptión del `.module`
 
 ### 4- Configurar OrdersMicroservice
+
 1. Instalamos el `@nestjs/microservices`
 2. Actualizamos el método de `NestFactory` para crear el microservicio.
 3. Corremos `nest g res orders --no-spec`: elegimos `Microservice (non-HTTP)` y luego le decimos que sí a que nos cree un CRUD
    Ésto crea una carpeta con el nombre `orders` y dentro crea un controller, un service y un module.
 
 ### 5- Conectar Gateway con OrdersMicroservice
+
 1. En el gateway, correr `nest g res orders --no-spec` y crear una API y CRUD.
 2. Borrar el servicio y borrar tudas sus referencias.
 3. Crear una key en `gateway/src/config/service.ts`
 4. Modificamos el `orders.controller.ts` para inyectar el microservicio en conjunto con el `ClientProxy`
 
    > Recordemos que es ULTRA necesario que estemos atentos a la forma en que se definió la key para cada EP del microservice, porque si en éste se definieron como simples strings pero después en el controller del gateway estamos queriendo definir la key en su versión de objeto (`{ cmd: key}`), no va a establecerse la conexión con ninguno de los EPs del MS.
-   
+
 5. Actualizamos el módulo `gateway/src/orders/orders.module.ts` para importar el `ClientsModule` con los datos de hosting del mircoservicio
 6. Actualizamos el `config` de variables de entorno para definir el host y el puerto para el nuevo MS al que haremos referencia en el archivo anterior
+
+### 6- Docker - Levantar PostgreSQL
+
+> [Sitio en que tenés disponible una DB gratis de postgreSQL](https://neon.tech)
+
+1. Crearnos en `orders/` el archivo `docker-compose.yaml`
+   ```yaml
+   version: "3"
+   services:
+      # Nombre del servicio
+      orders-db:
+         container_name: orders-db
+         image: postgres:16.2
+         # Cada vez que se levante docker desktop se levantará esta imagen
+         restart: always
+         volumes:
+            # Carpeta en nuestro proyecto:path en el contenedor donde se guarda la data (que podemos determinar cuál es en la docu oficial de docker)
+            # Ésto permitirá que si se destruye el contenedor, no se pierda la data.
+            - ./postgres:/var/lib/postgresql/data
+         ports:
+            # Puerto de mi PC:Puerto del contenedor
+            # Sólo a través de ese puerto podré acceder a la DB
+            - 5432:5432
+         environment:
+            # Definimos las variables de entorno
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123456
+            - POSTGRES_DB=orders_db
+   ```
+2. En el directorio donde esté el `.yaml`, ejecutamos `docker compose up -d`
+   > `compose` quiere decir que se levantará el contenedor en base a las indicaciones del archivo `docker-compose` que por defecto infiere que está en el directorio raíz.
+   
+   > `-d` es para que podamos cerrar la terminal sin que éso implique que se deje de correr el contenedor
+
+   Si vamos a docker desktop veremos que nuestro contenedor está levantado:
+
+   ![Contenedor de PostgreSQL en Docker Desktop](./assets/docker-desktop-container-list.png)
+
+3. En nuestro `.gitignore` agregaremos la carpeta `orders/postgres` donde se guardan cosas relacionadas a la DB que no deben subirse al proyecto.
+
+   Éste directorio se crea por defecto cuando corremos por primera vez el comando anterior.
+
+4. Conectarse a la DB desde cualquier gestor de DB usando los valores definidos en las variables del `.yaml`
+

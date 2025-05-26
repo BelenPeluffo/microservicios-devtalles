@@ -6,6 +6,8 @@ interface EnvVars {
   DATABASE_URL: string;
   PRODUCTS_MS_HOST: string;
   PRODUCTS_MS_PORT: number;
+  // ORDERS_MS_HOST: string;
+  ORDERS_MS_PORT: number;
 }
 
 const envSchema = Joi.object({
@@ -13,6 +15,8 @@ const envSchema = Joi.object({
   DATABASE_URL: Joi.string().required(),
   PRODUCTS_MS_HOST: Joi.string().required(),
   PRODUCTS_MS_PORT: Joi.number().required(),
+  // ORDERS_MS_HOST: Joi.string().required(),
+  ORDERS_MS_PORT: Joi.number().required(),
 }).unknown(true);
 
 const { error, value } = envSchema.validate(process.env);
@@ -28,4 +32,6 @@ export const config = {
   DATABASE_URL: envs.DATABASE_URL,
   PRODUCTS_MS_HOST: envs.PRODUCTS_MS_HOST,
   PRODUCTS_MS_PORT: envs.PRODUCTS_MS_PORT,
+  // ORDERS_MS_HOST: envs.PRODUCTS_MS_HOST,
+  ORDERS_MS_PORT: envs.ORDERS_MS_PORT,
 };

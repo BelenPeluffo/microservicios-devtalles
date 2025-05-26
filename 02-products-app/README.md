@@ -240,3 +240,13 @@ Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-pr
 3. Corremos `nest g res orders --no-spec`: elegimos `Microservice (non-HTTP)` y luego le decimos que sí a que nos cree un CRUD
    Ésto crea una carpeta con el nombre `orders` y dentro crea un controller, un service y un module.
 
+### 5- Conectar Gateway con OrdersMicroservice
+1. En el gateway, correr `nest g res orders --no-spec` y crear una API y CRUD.
+2. Borrar el servicio y borrar tudas sus referencias.
+3. Crear una key en `gateway/src/config/service.ts`
+4. Modificamos el `orders.controller.ts` para inyectar el microservicio en conjunto con el `ClientProxy`
+
+   > Recordemos que es ULTRA necesario que estemos atentos a la forma en que se definió la key para cada EP del microservice, porque si en éste se definieron como simples strings pero después en el controller del gateway estamos queriendo definir la key en su versión de objeto (`{ cmd: key}`), no va a establecerse la conexión con ninguno de los EPs del MS.
+   
+5. Actualizamos el módulo `gateway/src/orders/orders.module.ts` para importar el `ClientsModule` con los datos de hosting del mircoservicio
+6. Actualizamos el `config` de variables de entorno para definir el host y el puerto para el nuevo MS al que haremos referencia en el archivo anterior

@@ -233,3 +233,10 @@ Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-pr
    6. Crear `config` con una propiedad por cada variable
    7. Asignar en `main.ts` al `listen()` el `config.PORT`
 3. Borrar todos los archivos del `src` con exceptión del `.module`
+
+### 4- Configurar OrdersMicroservice
+1. Instalamos el `@nestjs/microservices`
+2. Actualizamos el método de `NestFactory` para crear el microservicio.
+3. Corremos `nest g res orders --no-spec`: elegimos `Microservice (non-HTTP)` y luego le decimos que sí a que nos cree un CRUD
+   Ésto crea una carpeta con el nombre `orders` y dentro crea un controller, un service y un module.
+

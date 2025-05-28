@@ -317,3 +317,19 @@ Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-pr
    > Fijarse que el nombre de la DB definida en la variable de entorno sea la correcta, porque si no no se van a crear las tablas correctamente y prisma igual no va a devolver error.
 8. Actualizar el `./orders/src/orders/orders.service.ts` para que extienda de `PrismaClient` e implemente `OnModuleInit`. En el constructor implementamos la lógica de conexión a la DB.
 9. Implementamos una instancia del `Logger` para imprimir cuando se haya realizado la conexión a la DB de forma correcta.
+
+### 8- Crear una nueva Orden
+
+1. Instalar `class-validator` y `class-transformer`
+2. Agregamos las configuraciones de pipes en el `main.ts`
+3. Modificar el `./orders/src/orders/dto/create-order.dts.ts`
+4. Copiar el DTO a `./gateway/src/orders/dto/create-order.dto.ts`
+5. Correr en orders `npx prisma generate`
+6. Eliminar del `schema.prisma` la propiedad `output` para que no devuelva error al levantar la app
+se crea por defecto dentro de:
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+```

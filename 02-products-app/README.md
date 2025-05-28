@@ -298,3 +298,22 @@ Será el encabezado de las órdenes y no el detalle, que irá a otro MS (`/02-pr
 
 4. Conectarse a la DB desde cualquier gestor de DB usando los valores definidos en las variables del `.yaml`
 
+### 7- Prisma - Modelo y conexión
+
+1. Instalamos `prisma`
+2. Instalamos el CLI haciendo `npx prisma`
+3. Inicializamos el paquete: `npx prisma init`
+   Ésto me creará el `orders/prisma/schema.prisma` y me actualizará el `orders/.env`.
+4. Modificamos el valor de `DATABASE_URL` para que coincida con los datos que definimos en las variables de entorno de nuestro contenedor
+   
+   La estructura del path es: `"tipo de DB://user:password@dominio:puerto/nombre db?schema=public"`. En nuestro caso, según lo que definimos en el `orders/docker-compose.yaml`, quedaría:
+
+   ```environment
+   DATABASE_URL="postgresql://postgres:123456@localhost:5432/orders_db?schema=public"
+   ```
+5. Instalar el cliente de prisma
+6. Actualizar el `schema.prisma` con el enum `OrderStatus` y el modelo `Order`
+7. Ejecutar la migración: `npx prisma migrate dev --name init`
+   > Fijarse que el nombre de la DB definida en la variable de entorno sea la correcta, porque si no no se van a crear las tablas correctamente y prisma igual no va a devolver error.
+8. Actualizar el `./orders/src/orders/orders.service.ts` para que extienda de `PrismaClient` e implemente `OnModuleInit`. En el constructor implementamos la lógica de conexión a la DB.
+9. Implementamos una instancia del `Logger` para imprimir cuando se haya realizado la conexión a la DB de forma correcta.

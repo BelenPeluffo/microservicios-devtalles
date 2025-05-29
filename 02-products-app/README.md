@@ -336,3 +336,10 @@ generator client {
 
 ### 9- Guardar orden en base de datos
 1. Implementar el método de prisma al `CREATE` en el servicio del MS
+
+### 10- Obtener orden por ID
+1. Implementar el método de prisma en el `FIND BY ID` del MS
+2. Implementar el `ParseUUIDPipe` en el servicio del gateway, en el mismo método y enviar el ID dentro de un objeto.
+3. Ídem en el servicio del MS y definir el `Payload` como ID
+4. Implementar gestión de error en servicio de MS
+5. Implementar gestión de error en gateway

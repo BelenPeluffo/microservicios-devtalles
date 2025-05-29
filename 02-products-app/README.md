@@ -333,3 +333,6 @@ generator client {
   provider = "prisma-client-js"
 }
 ```
+
+### 9- Guardar orden en base de datos
+1. Implementar el método de prisma al `CREATE` en el servicio del MS
